@@ -1,7 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {getCourses} from "../api/courseApi";
+import CourseList from "../components/CourseList";
 
-class CoursesPage extends React.Component{
+
+function CoursePage(){
+    const [courses, setCourses] = useState([])
+    
+    useEffect(() => {
+        getCourses().then(response => setCourses(response)).catch(error => new Error(error))
+    },[])
+    
+    return( 
+    
+        <CourseList course={courses} />
+    )
+    
+    
+}
+export default CoursePage;
+
+/*class CoursesPage extends React.Component{
     constructor(props){
         super(props);
 
@@ -9,9 +27,7 @@ class CoursesPage extends React.Component{
             courses:[]
         };
     }
-    componentDidMount(){
-        getCourses().then(course=>this.setState({courses:course})).catch(err =>  new Error(err))
-    };
+    
     renderRow(course){
         return(
             <tr key={course.id}>
@@ -22,6 +38,10 @@ class CoursesPage extends React.Component{
         )  
     }
 
+    componentDidMount(){
+        getCourses().then(course=>this.setState({courses:course})).catch(err =>  new Error(err))
+    };
+ 
     render(){
         return( 
         <>
@@ -43,5 +63,5 @@ class CoursesPage extends React.Component{
         )
     }
 }
+export default CoursesPage;*/
 
-export default CoursesPage;
