@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {getCourses} from "../api/courseApi";
 import CourseList from "../components/CourseList";
+import { Link } from "react-router-dom";
 
-
+//using _courses to chage same value words {courses:_courses}
 function CoursePage(){
     const [courses, setCourses] = useState([])
     
@@ -11,8 +12,13 @@ function CoursePage(){
     },[])
     
     return( 
-    
+        <React.Fragment>
+        <h2>Courses</h2>
+        <Link to="/course" className="btn btn-primary">
+            Add CourseList
+        </Link>
         <CourseList course={courses} />
+        </React.Fragment>
     )
     
     

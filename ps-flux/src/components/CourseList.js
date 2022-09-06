@@ -1,17 +1,11 @@
 import React from "react";
-function Renderow(course){
-    return(
-        <tr key={course.id}>
-            <td className="table-secondary">{course.title}</td>
-            <td>{course.authorId}</td>
-            <td className="table-secondary">{course.category}</td>
-        </tr>                        
-    )  
-}
-function CourseList({course}){
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+
+function CourseList(props){
     return( 
         <>
-        <h2>Courses</h2>
+    
         <table className="table table-hover">
             <thead>
                 <tr>
@@ -21,11 +15,28 @@ function CourseList({course}){
                 </tr>
             </thead>
             <tbody >
-            {course.map(course => Renderow(course))}
+                {props.course.map(course => 
+                    { return ( 
+                        <tr key={course.id}>
+                            <td className="table-secondary"><Link to={`/course/${course.slug}`}>{course.title}</Link></td>
+                            <td>{course.authorId}</td>
+                            <td className="table-secondary">{course.category}</td>
+                        </tr> 
+                        )
+                    })
+                }
             </tbody>
         </table>
         </>
     );
 }
-
+CourseList.propTypes = {
+    course:PropTypes.array.isRequired
+}
 export default CourseList;
+
+/*PropTypes.shape(
+        {
+            id:PropTypes.number.isRequired
+        }
+    ) */
