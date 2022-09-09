@@ -12,6 +12,7 @@ function CourseList(props){
                     <th className="table-dark">Title</th>
                     <th>Author ID</th>
                     <th className="table-dark">Category</th>
+                    <th>AuthorName</th>
                 </tr>
             </thead>
             <tbody >
@@ -21,10 +22,19 @@ function CourseList(props){
                             <td className="table-secondary"><Link to={`/course/${course.slug}`}>{course.title}</Link></td>
                             <td>{course.authorId}</td>
                             <td className="table-secondary">{course.category}</td>
+                            <td>{props.author.map(_author => {
+                                let name
+                               if(_author.id === course.authorId){
+                                    name =  _author.name
+                                } 
+                                return name;
+                            })}</td>
                         </tr> 
                         )
                     })
+                  
                 }
+                
             </tbody>
         </table>
         </>
